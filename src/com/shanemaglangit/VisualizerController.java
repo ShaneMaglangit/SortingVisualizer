@@ -24,11 +24,15 @@ public class VisualizerController implements ActionListener {
 
     private void randomize() {
         ArrayList<Integer> values = new ArrayList();
-        ArrayList<Integer> factors = getFactors(view.getCanvas().getWidth());
+        ArrayList<Integer> factors = Util.getFactors(view.getCanvas().getWidth());
+        int valueHeight = view.getCanvas().getHeight();
 
-        for(int i = 0; i < factors.get(factors.size() - 3); i++) {
-            values.add((int)(Math.random() * 95 + 5));
+        for(int i = 1; i <= factors.get(factors.size() - 2); i++) {
+            if(valueHeight >= 10) values.add(valueHeight--);
+            else values.add((int)(Math.random() * view.getCanvas().getHeight() + 10));
         }
+
+        Collections.shuffle(values);
 
         view.updateCanvas(values, null);
     }
@@ -46,7 +50,7 @@ public class VisualizerController implements ActionListener {
                             values.set(j, values.get(j + 1));
                             values.set(j + 1, temp);
                         }
-                        Thread.sleep(0, 500);
+                        Thread.sleep(0, 10);
                     }
                 }
             } catch (InterruptedException interruptedException) {
@@ -55,22 +59,5 @@ public class VisualizerController implements ActionListener {
                 view.updateCanvas(values, null);
             }
         }).start();
-    }
-
-    private ArrayList<Integer> getFactors(int num) {
-        ArrayList<Integer> factors = new ArrayList();
-
-        for(int i = 1; i <= Math.sqrt(num); i++) {
-            if(num % i == 0) {
-                factors.add(i);
-                if(i != Math.sqrt(num)) {
-                    factors.add(num / i);
-                }
-            }
-        }
-
-        Collections.sort(factors);
-
-        return factors;
     }
 }
