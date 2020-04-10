@@ -5,13 +5,13 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class VisualizerCanvas extends JPanel {
+public class Canvas extends JPanel {
     private static final int BORDER_WIDTH = 2;
 
     ArrayList<Integer> values;
     Integer activeIndex = null;
 
-    public VisualizerCanvas() {
+    public Canvas() {
         this.values = new ArrayList<>();
 
         setBackground(Color.BLACK);
