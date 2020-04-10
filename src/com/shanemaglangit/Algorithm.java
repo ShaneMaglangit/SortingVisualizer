@@ -136,6 +136,43 @@ public abstract class Algorithm {
         }
     }
 
+    public static void quickSort(ArrayList<Integer> values, VisualizerFrame view, int low, int high, int millis, int nano) throws InterruptedException {
+        if(low < high) {
+            int partitionIndex = partition(values, view, low, high, millis, nano);
+
+            quickSort(values, view, low, partitionIndex - 1, millis, nano);
+            quickSort(values, view, partitionIndex + 1, high, millis, nano);
+        }
+    }
+
+    private static int partition(ArrayList<Integer> values, VisualizerFrame view, int low, int high, int millis, int nano) throws InterruptedException{
+        int pivot = values.get(high);
+        int pointer = low;
+
+        for(int i = low; i < high; i++) {
+
+            view.updateCanvas(values, i);
+            Thread.sleep(millis, nano);
+
+            if(values.get(i) < pivot) {
+                view.updateCanvas(values, pointer);
+                Thread.sleep(millis, nano);
+
+                swap(values, pointer++, i);
+            }
+        }
+
+        view.updateCanvas(values, high);
+        Thread.sleep(millis, nano);
+
+        swap(values, pointer, high);
+
+        view.updateCanvas(values, pointer);
+        Thread.sleep(millis, nano);
+
+        return pointer;
+    }
+
     private static void swap(ArrayList<Integer> values, int x, int y) {
         int temp = values.get(x);
         values.set(x, values.get(y));

@@ -26,9 +26,9 @@ public class VisualizerController implements ActionListener {
         ArrayList<Integer> values = new ArrayList();
         ArrayList<Integer> factors = Util.getFactors(view.getCanvas().getWidthWithBorder());
         int valueHeight = view.getCanvas().getHeight();
-        int decrement = valueHeight / factors.get(factors.size() - 2) + 1;
+        int decrement = valueHeight / factors.get(factors.size() - 3) + 1;
 
-        for(int i = 1; i <= factors.get(factors.size() - 2); i++) {
+        for(int i = 1; i <= factors.get(factors.size() - 3); i++) {
             if(valueHeight >= 10) values.add(valueHeight -= decrement);
             else values.add((int)(Math.random() * view.getCanvas().getHeight() + 10));
         }
@@ -47,7 +47,8 @@ public class VisualizerController implements ActionListener {
 //                Algorithm.selectionSort(values, view, 0, 2);
 //                Algorithm.insertionSort(values, view, 0, 2);
 //                Algorithm.heapSort(values, view, 0, 10);
-                Algorithm.mergeSort(values, view, 0, values.size() - 1, 5, 0);
+//                Algorithm.mergeSort(values, view, 0, values.size() - 1, 5, 0);
+                Algorithm.quickSort(values, view, 0, values.size() - 1, 5, 0);
             } catch (InterruptedException interruptedException) {
                 System.out.println("Thread interrupted");
             } finally {
