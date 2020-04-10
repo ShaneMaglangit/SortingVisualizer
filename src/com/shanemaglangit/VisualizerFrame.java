@@ -18,8 +18,6 @@ public class VisualizerFrame extends JFrame {
         btnRandomize = new JButton("Randomize");
         btnVisualize = new JButton("Visualize");
 
-        canvas.setBackground(Color.BLACK);
-
         add(btnRandomize);
         add(btnVisualize);
         add(canvas);

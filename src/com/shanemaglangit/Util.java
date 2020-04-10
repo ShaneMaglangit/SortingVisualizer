@@ -3,7 +3,7 @@ package com.shanemaglangit;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Util {
+public abstract class Util {
     public static ArrayList<Integer> getFactors(int num) {
         ArrayList<Integer> factors = new ArrayList();
 

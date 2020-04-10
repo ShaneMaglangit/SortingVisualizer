@@ -24,11 +24,12 @@ public class VisualizerController implements ActionListener {
 
     private void randomize() {
         ArrayList<Integer> values = new ArrayList();
-        ArrayList<Integer> factors = Util.getFactors(view.getCanvas().getWidth());
+        ArrayList<Integer> factors = Util.getFactors(view.getCanvas().getWidthWithBorder());
         int valueHeight = view.getCanvas().getHeight();
+        int decrement = valueHeight / factors.get(factors.size() - 2) + 1;
 
         for(int i = 1; i <= factors.get(factors.size() - 2); i++) {
-            if(valueHeight >= 10) values.add(valueHeight--);
+            if(valueHeight >= 10) values.add(valueHeight -= decrement);
             else values.add((int)(Math.random() * view.getCanvas().getHeight() + 10));
         }
 
@@ -42,17 +43,11 @@ public class VisualizerController implements ActionListener {
 
         new Thread(() -> {
             try {
-                for (int i = 0; i < values.size(); i++) {
-                    for (int j = 0; j < values.size() - 1; j++) {
-                        view.updateCanvas(values, j);
-                        if (values.get(j) > values.get(j + 1)) {
-                            int temp = values.get(j);
-                            values.set(j, values.get(j + 1));
-                            values.set(j + 1, temp);
-                        }
-                        Thread.sleep(0, 10);
-                    }
-                }
+//                Algorithm.bubbleSort(values, view, 0, 2);
+//                Algorithm.selectionSort(values, view, 0, 2);
+//                Algorithm.insertionSort(values, view, 0, 2);
+//                Algorithm.heapSort(values, view, 0, 10);
+                Algorithm.mergeSort(values, view, 0, values.size() - 1, 5, 0);
             } catch (InterruptedException interruptedException) {
                 System.out.println("Thread interrupted");
             } finally {
